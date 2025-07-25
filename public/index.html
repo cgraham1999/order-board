@@ -44,23 +44,23 @@
       align-items: center;
     }
 
-    /* Order number smaller */
-    .order-number {
-      font-size: 1em;
-      font-weight: bold;
-      color: #aaa;
-    }
-
     /* Customer name bigger */
     .customer {
-      font-size: 1.3em;
+      font-size: 1.5em;
       font-weight: bold;
       margin-top: 2px;
       text-align: center;
     }
 
+    /* Order number smaller */
+    .order-number {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: #aaa;
+    }
+
     .status-time {
-      font-size: 0.9em;
+      font-size: 0.8em;
       color: #ccc;
       margin-top: 2px;
     }
@@ -90,24 +90,26 @@
         progressDiv.innerHTML = '';
 
         data.ready.forEach(order => {
-          const div = document.createElement('div');
-          div.className = 'order';
-          div.innerHTML = `
-            <div class="order-number">#${order.number}</div>
-            <div class="customer">${order.name}</div>
-          `;
-          readyDiv.appendChild(div);
-        });
+  const div = document.createElement('div');
+  div.className = 'order';
+  div.innerHTML = `
+    <div class="customer">${order.name}</div>
+    <div class="order-number">Order #${order.number}</div>
+  `;
+  readyDiv.appendChild(div);
+});
 
-        data.progress.forEach(order => {
-          const div = document.createElement('div');
-          div.className = 'order';
-          div.innerHTML = `
-            <div class="order-number">#${order.number}</div>
-            <div class="customer">${order.name}</div>
-            <div class="status-time">${order.statusTime}</div>
-          `;
-          progressDiv.appendChild(div);
+data.progress.forEach(order => {
+  const div = document.createElement('div');
+  div.className = 'order';
+  div.innerHTML = `
+    <div class="customer">${order.name}</div>
+    <div class="order-number">Order #${order.number}</div>
+    <div class="status-time">${order.statusTime}</div>
+  `;
+  progressDiv.appendChild(div);
+});
+
         });
       } catch (err) {
         console.error('Error fetching orders:', err);
