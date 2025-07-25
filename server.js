@@ -85,8 +85,8 @@ app.get('/orders', async (req, res) => {
           },
         });
 
-        const number = order.displayNumber || null;
         const name = order.checks?.[0]?.tabName || 'Guest';
+        const number = order.displayNumber || null;
         const created = order.createdDate || null;
         const selections = order.checks?.[0]?.selections || [];
 
