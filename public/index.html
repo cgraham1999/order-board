@@ -11,16 +11,18 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: space-between;
-      padding: 20px;
+      padding: 10px;
+      margin: 0;
     }
 
     .column {
-      width: 48%;
+      width: 49%;
     }
 
     h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
+      font-size: 1.8em;
+      margin-bottom: 8px;
+      text-align: center;
     }
 
     .ready h1 {
@@ -35,21 +37,32 @@
       background-color: #222;
       border: 1px solid #444;
       border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 10px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
+    /* Order number smaller */
     .order-number {
-      font-size: 1.5em;
+      font-size: 1em;
       font-weight: bold;
+      color: #aaa;
     }
 
+    /* Customer name bigger */
     .customer {
-      font-style: italic;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 2px;
+      text-align: center;
     }
 
     .status-time {
-      color: #aaa;
+      font-size: 0.9em;
+      color: #ccc;
+      margin-top: 2px;
     }
   </style>
 </head>
@@ -102,7 +115,7 @@
     }
 
     fetchOrders();
-    setInterval(fetchOrders, 30000); // Refresh every 30 seconds
+    setInterval(fetchOrders, 30000);
   </script>
 </body>
 </html>
