@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Status Board</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .column {
+      width: 48%;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .ready h1 {
+      color: limegreen;
+    }
+
+    .progress h1 {
+      color: lightgray;
+    }
+
+    .order {
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .order-number {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .customer {
+      font-style: italic;
+    }
+
+    .status-time {
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="column ready">
+    <h1>✔ Ready</h1>
+    <div id="ready-orders"></div>
+  </div>
+
+  <div class="column progress">
+    <h1>⏳ In Progress</h1>
+    <div id="progress-orders"></div>
+  </div>
+
+  <script>
+    async function fetchOrders() {
+      try {
+        const res = await fetch('/orders');
+        const data = await res.json();
+
+        const readyDiv = document.getElementById('ready-orders');
+        const progressDiv = document.getElementById('progress-orders');
+
+        readyDiv.innerHTML = '';
+        progressDiv.innerHTML = '';
+
+        data.ready.forEach(order => {
+          const div = document.createElement('div');
+          div.className = 'order';
+          div.innerHTML = `
+            <div class="order-number">#${order.number}</div>
+            <div class="customer">${order.name}</div>
+          `;
+          readyDiv.appendChild(div);
+        });
+
+        data.progress.forEach(order => {
+          const div = document.createElement('div');
+          div.className = 'order';
+          div.innerHTML = `
+            <div class="order-number">#${order.number}</div>
+            <div class="customer">${order.name}</div>
+            <div class="status-time">${order.statusTime}</div>
+          `;
+          progressDiv.appendChild(div);
+        });
+      } catch (err) {
+        console.error('Error fetching orders:', err);
+      }
+    }
+
+    fetchOrders();
+    setInterval(fetchOrders, 30000); // Refresh every 30 seconds
+  </script>
+</body>
+</html>
