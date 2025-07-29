@@ -30,6 +30,7 @@ const allowedMenuGroupGuids = new Set([
 '900000005197891170', // Salads and cold food
 '900000005197891160', // Misc
 '900000005197891160', // Eggs and Omelets
+'900000005197891738', // Omelett Build your own
 
 ]);
 
