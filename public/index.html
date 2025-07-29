@@ -11,7 +11,7 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: space-between;
-      padding: 10px;
+      padding: 20px;
       margin: 0;
     }
 
@@ -20,8 +20,8 @@
     }
 
     h1 {
-      font-size: 1.8em;
-      margin-bottom: 8px;
+      font-size: 2.7em;
+      margin-bottom: 16px;
       text-align: center;
     }
 
@@ -34,35 +34,31 @@
     }
 
     .order {
-      background-color: #222;
-      border: 1px solid #444;
-      border-radius: 5px;
-      padding: 6px 8px;
-      margin-bottom: 6px;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
+      background-color: #222;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      padding: 20px 24px;
+      font-size: 2.5em;
     }
 
-    /* Customer name bigger */
-    .customer {
-      font-size: 1.5em;
-      font-weight: bold;
-      margin-top: 2px;
+    .customer,
+    .status-time,
+    .order-number {
+      flex: 1;
       text-align: center;
     }
 
-    /* Order number smaller */
-    .order-number {
-      font-size: 0.8em;
-      font-weight: bold;
-      color: #aaa;
+    .customer {
+      text-align: left;
     }
 
-    .status-time {
-      font-size: 0.8em;
-      color: #ccc;
-      margin-top: 2px;
+    .order-number {
+      text-align: right;
     }
   </style>
 </head>
@@ -90,27 +86,26 @@
         progressDiv.innerHTML = '';
 
         data.ready.forEach(order => {
-  const div = document.createElement('div');
-  div.className = 'order';
-  div.innerHTML = `
-    <div class="customer">${order.name}</div>
-    <div class="order-number">Order #${order.number}</div>
-  `;
-  readyDiv.appendChild(div);
-});
-
-data.progress.forEach(order => {
-  const div = document.createElement('div');
-  div.className = 'order';
-  div.innerHTML = `
-    <div class="customer">${order.name}</div>
-    <div class="order-number">Order #${order.number}</div>
-    <div class="status-time">${order.statusTime}</div>
-  `;
-  progressDiv.appendChild(div);
-});
-
+          const div = document.createElement('div');
+          div.className = 'order';
+          div.innerHTML = `
+            <div class="customer">${order.name}</div>
+            <div class="order-number">#${order.number}</div>
+          `;
+          readyDiv.appendChild(div);
         });
+
+        data.progress.forEach(order => {
+          const div = document.createElement('div');
+          div.className = 'order';
+          div.innerHTML = `
+            <div class="customer">${order.name}</div>
+            <div class="status-time">${order.statusTime}</div>
+            <div class="order-number">#${order.number}</div>
+          `;
+          progressDiv.appendChild(div);
+        });
+
       } catch (err) {
         console.error('Error fetching orders:', err);
       }
